@@ -5,7 +5,12 @@ from .serializers import UserSerializer, AthletesSerializer, EventsSerializer, M
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Athletes, Events, Medals, Schedules, Teams
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_simplejwt.views import TokenObtainPairView
 
+from .serializers import CustomTokenObtainPairSerializer
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
       
 class CreateUserView(generics.CreateAPIView):

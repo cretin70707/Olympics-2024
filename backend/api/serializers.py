@@ -1,6 +1,19 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Athletes, Events, Medals, Schedules, Teams
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        # Add custom claims
+        data['username'] = self.user.username
+        data['email'] = self.user.email
+        return data
+
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

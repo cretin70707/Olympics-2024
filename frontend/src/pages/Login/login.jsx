@@ -20,6 +20,8 @@ const Login = () => {
             const response = await api.post("/api/token/", {username, password});
             localStorage.setItem(ACCESS_TOKEN, response.data.access);
             localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
+            localStorage.setItem("username", response.data.username);
+            localStorage.setItem("email", response.data.email);
             console.log("Access Token:", localStorage.getItem("access_token"));
             console.log("Refresh Token:", localStorage.getItem("refresh_token"));
 
